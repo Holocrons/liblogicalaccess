@@ -9,8 +9,7 @@ class LLAConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     requires = 'boost/1.68.0@conan/stable', 'OpenSSL/1.0.2r@conan/stable'
     generators = "cmake"
-    options = {'LLA_BUILD_IKS': [True, False],
-               'LLA_BUILD_PKCS': [True, False],
+    options = {'LLA_BUILD_PKCS': [True, False],
                'LLA_BUILD_UNITTEST': [True, False],
                'LLA_BUILD_RFIDEAS': [True, False]}
     exports_sources = "plugins*", "src*", "include*", "CMakeLists.txt", "cmake*", "liblogicalaccess.config", "tests*"
@@ -19,8 +18,6 @@ class LLAConan(ConanFile):
         default_options = '''
         OpenSSL:shared=True
         boost:shared=False
-        gtest:shared=True
-        LLA_BUILD_IKS=True
         LLA_BUILD_PKCS=True
         LLA_BUILD_RFIDEAS=True
         LLA_BUILD_UNITTEST=False'''
@@ -29,7 +26,6 @@ class LLAConan(ConanFile):
         OpenSSL:shared=True
         boost:shared=True
         gtest:shared=True
-        LLA_BUILD_IKS=True
         LLA_BUILD_PKCS=True
         LLA_BUILD_UNITTEST=False'''
 
@@ -58,10 +54,6 @@ class LLAConan(ConanFile):
             cmake.definitions['CONAN_LIBCXX'] = ''
             cmake.definitions['LLA_BOOST_ASIO_HAS_STD_STRING_VIEW'] = 1
 
-        if self.options.LLA_BUILD_IKS:
-            cmake.definitions['LLA_BUILD_IKS'] = True
-        else:
-            cmake.definitions['LLA_BUILD_IKS'] = False
 
         if self.options.LLA_BUILD_PKCS:
             cmake.definitions['LLA_BUILD_PKCS'] = True
