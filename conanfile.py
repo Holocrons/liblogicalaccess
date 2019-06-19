@@ -14,7 +14,7 @@ class LLAConan(ConanFile):
                'LLA_BUILD_UNITTEST': [True, False],
                'LLA_BUILD_RFIDEAS': [True, False]}
     exports_sources = "plugins*", "src*", "include*", "CMakeLists.txt", "cmake*", "liblogicalaccess.config", "tests*"
-    
+
     if tools.os_info.is_windows:
         default_options = '''
         OpenSSL:shared=True
@@ -37,12 +37,10 @@ class LLAConan(ConanFile):
         if self.settings.os != 'Windows':
             # This options is not used on Linux
             del self.options.LLA_BUILD_RFIDEAS
-       
+
     def requirements(self):
         if tools.os_info.is_windows and self.options.LLA_BUILD_RFIDEAS:
             self.requires('rfideas/7.1.5@islog/stable')
-        if self.options.LLA_BUILD_IKS:
-            self.requires('grpc/1.14.1@inexorgame/stable')
         if self.options.LLA_BUILD_UNITTEST:
             self.requires('gtest/1.8.1@bincrafters/stable')
         if self.options.LLA_BUILD_PKCS:
@@ -59,7 +57,7 @@ class LLAConan(ConanFile):
             # to compiler. See https://github.com/conan-io/conan/issues/2856
             cmake.definitions['CONAN_LIBCXX'] = ''
             cmake.definitions['LLA_BOOST_ASIO_HAS_STD_STRING_VIEW'] = 1
-        
+
         if self.options.LLA_BUILD_IKS:
             cmake.definitions['LLA_BUILD_IKS'] = True
         else:
@@ -74,7 +72,7 @@ class LLAConan(ConanFile):
             cmake.definitions['LLA_BUILD_UNITTEST'] = True
         else:
             cmake.definitions['LLA_BUILD_UNITTEST'] = False
-            
+
         if 'LLA_BUILD_RFIDEAS' in self.options and self.options.LLA_BUILD_RFIDEAS:
             cmake.definitions['LLA_BUILD_RFIDEAS'] = True
         else:
@@ -82,7 +80,7 @@ class LLAConan(ConanFile):
 
         cmake.definitions['LIBLOGICALACCESS_VERSION_STRING'] = self.version
         cmake.definitions['LIBLOGICALACCESS_WINDOWS_VERSION'] = self.version.replace('.', ',') + ',0'
-        cmake.definitions['TARGET_ARCH'] = self.settings.arch		
+        cmake.definitions['TARGET_ARCH'] = self.settings.arch
 
         if tools.os_info.is_windows:
             # For MSVC we need to restrict configuration type to avoid issues.
@@ -123,7 +121,7 @@ class LLAConan(ConanFile):
                 self.cpp_info.libs.append('islogkbdhooklib64')
             else:
                 self.cpp_info.libs.append('islogkbdhooklib32')
-        
+
         # Linux / Windows common plugins.
         self.cpp_info.libs.append('llacommon')
         self.cpp_info.libs.append('logicalaccess-cryptolib')
