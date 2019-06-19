@@ -4,6 +4,8 @@ python: "3.7"
 dist: xenial
 compiler:
   - gcc
+git:
+  submodules: true
 install:
 # Install conan
   - pip install conan
