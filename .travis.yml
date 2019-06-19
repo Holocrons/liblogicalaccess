@@ -15,5 +15,5 @@ script:
 # Call your build system
   - cmake . -G "Unix Makefiles"
   - cmake --build .
-# Run your tests
+# Run your test
   - ctest .
