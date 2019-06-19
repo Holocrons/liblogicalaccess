@@ -5,7 +5,9 @@ dist: xenial
 compiler:
   - gcc
 git:
-  submodules: true
+  submodules: false
+before_install:
+  - git submodule update --init --recursive
 install:
 # Install conan
   - pip install conan
