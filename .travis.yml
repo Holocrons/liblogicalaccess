@@ -15,6 +15,5 @@ install:
   - conan user
 script:
 # Download dependencies and build project
-  - conan install . -o LLA_BUILD_PKCS=False -o LLA_BUILD_IKS=False
-  - conan export-pkg . LogicalAccess/2.1.0@islog/develop
+  - conan create . LogicalAccess/2.1.0@islog/develop
 # Call your build system
