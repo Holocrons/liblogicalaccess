@@ -5,7 +5,7 @@ dist: xenial
 compiler:
   - gcc
 git:
-  submodules: true
+  submodules: false
 before_install:
   - git submodule update --init --recursive
 install:
@@ -16,8 +16,3 @@ install:
 script:
 # Download dependencies and build project
   - conan install .
-# Call your build system
-  - cmake . -G "Unix Makefiles"
-  - cmake --build .
-# Run your test
-  - ctest .
