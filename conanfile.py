@@ -40,7 +40,7 @@ class LLAConan(ConanFile):
         if self.options.LLA_BUILD_UNITTEST:
             self.requires('gtest/1.8.1@bincrafters/stable')
         if self.options.LLA_BUILD_PKCS:
-            self.requires('cppkcs11/1.0@islog/develop')
+            self.requires('cppkcs11/1.0@islog/master')
 
     def imports(self):
         if tools.os_info.is_windows:
