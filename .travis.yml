@@ -15,6 +15,6 @@ install:
   - conan user
 script:
 # Download dependencies and build project
-  - conan install . -o LLA_BUILD_PKCS=False
+  - conan install . -o LLA_BUILD_PKCS=False -o LLA_BUILD_IKS=False
   - conan build .
 # Call your build system
