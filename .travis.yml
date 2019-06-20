@@ -15,5 +15,6 @@ install:
   - conan user
 script:
 # Download dependencies and build project
+  - conan remote add cppkcs11 http://conan.islog.private/artifactory/api/conan/cppkcs11
   - conan install .
 # Call your build system
