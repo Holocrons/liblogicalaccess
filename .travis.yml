@@ -1,12 +1,9 @@
 matrix:
   include:
-    os: linux
+  - os: linux
     dist: trusty
     language: python
     python: "3.7"
-    dist: xenial
-    compiler:
-      - gcc
     addons:
       apt:
         update: true
@@ -19,6 +16,21 @@ matrix:
     env:
       - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
+  - os: linux
+    addons:
+    dist: trusty
+    language: python
+    python: "3.7"
+      apt:
+        update: true
+        sources:
+          - ubuntu-toolchain-r-test
+          - llvm-toolchain-trusty-5.0
+        packages:
+          - clang-6.0
+    env:
+      - MATRIX_EVAL="CC=clang-6.0 && CXX=clang-6.0"
+
 before_install:
   - sudo apt-get install -y libpcsclite-dev
   - eval "${MATRIX_EVAL}"
@@ -27,19 +39,10 @@ install:
   - pip install conan
   - conan user
 script:
-  - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
-  - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
-  - export CC=/usr/bin/gcc-6
-  - export CXX=/usr/bin/g++-6
-  - gcc -v
+   -gcc -v
   - mkdir build
   - cd build
   - conan create .. LogicalAccess/2.1.0@islog/develop
   - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest
   - conan build ..
   - ctest
-
-notifications:
-  email:
-    recipients:
-      - reports@islog.com
