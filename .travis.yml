@@ -17,10 +17,10 @@ matrix:
       - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
   - os: linux
-    addons:
     dist: trusty
     language: python
     python: "3.7"
+    addons:
       apt:
         update: true
         sources:
