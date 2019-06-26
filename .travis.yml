@@ -14,6 +14,18 @@ matrix:
           - gcc-6
     env:
       - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+    script:
+      - echo z
+      - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
+      - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
+      - export CC=/usr/bin/gcc-6
+      - export CXX=/usr/bin/g++-6
+      - mkdir build;
+      - cd build
+      - conan create .. LogicalAccess/2.1.0@islog/develop
+      - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL
+      - conan build ..
+      - ctest
 
   - os: linux
     dist: trusty
@@ -28,6 +40,14 @@ matrix:
           - clang-5.0
     env:
       - MATRIX_EVAL="CC=clang-5.0 && CXX=clang-5.0"
+    script:
+      - echo e
+      - mkdir build;
+      - cd build
+      - conan create .. LogicalAccess/2.1.0@islog/develop
+      - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL
+      - conan build ..
+      - ctest
 
 before_install:
   - sudo apt-get install -y libpcsclite-dev
@@ -36,17 +56,6 @@ before_install:
 install:
   - pip install conan
   - conan user
-script:
-  - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
-  - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
-  - export CC=/usr/bin/gcc-6
-  - export CXX=/usr/bin/g++-6
-  - mkdir build;
-  - cd build
-  - conan create .. LogicalAccess/2.1.0@islog/develop
-  - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL
-  - conan build ..
-  - ctest
 
 notifications:
   email:
