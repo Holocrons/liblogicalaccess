@@ -30,7 +30,7 @@ matrix:
       - ctest
 
   - os: linux
-    dist: xenial
+    dist: trusty
     compiler:
       - clang
     language: python
@@ -38,8 +38,7 @@ matrix:
       apt:
         update: true
         sources:
-          - ubuntu-toolchain-r-test
-          - llvm-toolchain-7
+          - llvm-toolchain-trusty-7
         packages:
           - clang-7
     env:
