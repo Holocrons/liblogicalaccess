@@ -1,10 +1,9 @@
-dist: trusty
-language: python
-python: "3.7"
-
 matrix:
   include:
   - os: linux
+    dist: trusty
+    language: python
+    python: "3.7"
     addons:
       apt:
         update: true
@@ -19,6 +18,9 @@ matrix:
 
   - os: linux
     addons:
+    dist: trusty
+    language: python
+    python: "3.7"
       apt:
         update: true
         sources:
