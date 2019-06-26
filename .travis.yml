@@ -40,14 +40,14 @@ matrix:
         update: true
         sources:
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-trusty-9.0
+          - llvm-toolchain-trusty-7.0
         packages:
-          - clang-9.0
+          - clang-7
     env:
-      - MATRIX_EVAL="CC=clang-9.0 && CXX=clang-9.0"
+      - MATRIX_EVAL="CC=clang-7 && CXX=clang-7"
     script:
-      - export CC=/usr/bin/clang-9.0
-      - export CXX=/usr/bin/clang-9.0
+      - export CC=/usr/bin/clang-7
+      - export CXX=/usr/bin/clang-7
       - mkdir build;
       - cd build
       - conan create .. LogicalAccess/2.1.0@islog/develop
