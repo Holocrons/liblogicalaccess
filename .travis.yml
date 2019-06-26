@@ -43,7 +43,7 @@ matrix:
         packages:
           - clang-6.0
     env:
-      - MATRIX_EVAL="CC=clang-6.0 && CXX=clang-7.0"
+      - MATRIX_EVAL="CC=clang-7.0 && CXX=clang-7.0"
     script:
       - export CC=/usr/bin/clang-7.0
       - export CXX=/usr/bin/clang-7.0
