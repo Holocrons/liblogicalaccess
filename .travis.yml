@@ -54,7 +54,7 @@ matrix:
     before_install:
       - |
         if [[ -n "$CLANG" ]]; then
-          wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key |
+          wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key
           sudo apt-add-repository -y "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-$CLANG main"
           sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA9EF27F
           sudo apt-add-repository -y "deb http://ppa.launchpad.net/ubuntu-toolchain-r/test/ubuntu trusty main"
