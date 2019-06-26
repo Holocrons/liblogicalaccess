@@ -39,6 +39,7 @@ install:
   - pip install conan
   - conan user
 script:
+   -gcc -v
   - mkdir build
   - cd build
   - conan create .. LogicalAccess/2.1.0@islog/develop
