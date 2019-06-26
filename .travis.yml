@@ -40,6 +40,6 @@ script:
   - mkdir build
   - cd build
   - conan create .. LogicalAccess/2.1.0@islog/develop
-  - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest
+  - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL
   - conan build ..
   - ctest
