@@ -40,6 +40,7 @@ matrix:
         sources:
           - ubuntu-toolchain-r-test
     env:
+      - CLANG=7 SAN_FLAGS="--enable-asan --enable-ubsan"
       - MATRIX_EVAL="CC=clang-7 && CXX=clang-7"
     script:
       - export CC=/usr/bin/clang-7
@@ -53,7 +54,7 @@ matrix:
     before_install:
       - |
         if [[ -n "$CLANG" ]]; then
-          wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+          wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key |
           sudo apt-add-repository -y "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-$CLANG main"
           sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA9EF27F
           sudo apt-add-repository -y "deb http://ppa.launchpad.net/ubuntu-toolchain-r/test/ubuntu trusty main"
