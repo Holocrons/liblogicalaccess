@@ -30,7 +30,7 @@ matrix:
       - ctest
 
   - os: linux
-    dist: xenial
+    dist: trusty
     compiler:
       - clang
     language: python
@@ -38,12 +38,13 @@ matrix:
       apt:
         update: true
         sources:
-          - llvm-toolchain-xenial-7
+          - llvm-toolchain-trusty-7
         packages:
           - clang-7
     env:
       - MATRIX_EVAL="CC=clang-7.0 && CXX=clang-7"
     script:
+      - sudo apt-get install clang-7
       - export CC=/usr/bin/clang-7
       - export CXX=/usr/bin/clang-7
       - mkdir build;
