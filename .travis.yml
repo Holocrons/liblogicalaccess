@@ -39,7 +39,6 @@ matrix:
         update: true
         sources:
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-trusty-7.0
         packages:
           - clang-7
     env:
