@@ -12,7 +12,6 @@ matrix:
         update: true
         sources:
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-trusty-5.0
         packages:
           - g++-6
           - gcc-6
@@ -31,7 +30,7 @@ matrix:
       - ctest
 
   - os: linux
-    dist: trusty
+    dist: xenial
     compiler:
       - clang
     language: python
@@ -40,14 +39,14 @@ matrix:
         update: true
         sources:
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-trusty-6.0
+          - llvm-toolchain-trusty-7.0
         packages:
           - clang-6.0
     env:
-      - MATRIX_EVAL="CC=clang-6.0 && CXX=clang-6.0"
+      - MATRIX_EVAL="CC=clang-6.0 && CXX=clang-7.0"
     script:
-      - export CC=/usr/bin/clang-6.0
-      - export CXX=/usr/bin/clang-6.0
+      - export CC=/usr/bin/clang-7.0
+      - export CXX=/usr/bin/clang-7.0
       - mkdir build;
       - cd build
       - conan create .. LogicalAccess/2.1.0@islog/develop
