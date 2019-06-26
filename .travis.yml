@@ -39,8 +39,6 @@ matrix:
         update: true
         sources:
           - ubuntu-toolchain-r-test
-        packages:
-          - clang-7
     env:
       - MATRIX_EVAL="CC=clang-7 && CXX=clang-7"
     script:
