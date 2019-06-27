@@ -24,13 +24,12 @@ namespace logicalaccess
       URI_FILE  = 0x1D  // file://
   };
 
-  struct EnumClassHash
+  template<> struct less<UriType>
   {
-      template <typename T>
-      std::size_t operator()(T t) const
-      {
-          return static_cast<std::size_t>(t);
-      }
+    bool operator() (const UriTyp& lhs, const UriTyp& rhs) const
+    {
+      return lhs < rhs;
+    }
   };
 
 class LLA_CORE_API UriRecord : public NdefRecord
@@ -62,7 +61,7 @@ class LLA_CORE_API UriRecord : public NdefRecord
   private:
     std::string m_uri;
     UriType m_prefixe;
-    std::unordered_map<UriType, int, std::string> m_prefixeMap;
+    std::unordered_map<UriType, std::string> m_prefixeMap;
 };
 }
 
