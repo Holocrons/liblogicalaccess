@@ -60,14 +60,15 @@ class LLA_CORE_API UriRecord : public NdefRecord
 };
 }
 
-template <int N, class TypeId> struct Indexer {};
-
 namespace std
 {
-  template <int N, class TypeId>
-  struct hash<Indexer<N, TypeId> >
+  template <UriType>
+  struct hash<UriType>
   {
-     size_t operator()(const Indexer<N, TypeId>& id) const noexcept { return 0; }
+     size_t operator()(const UriType& id) const noexcept
+     {
+       return 0;
+     }
    };
 }
 #endif
