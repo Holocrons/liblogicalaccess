@@ -40,17 +40,17 @@ matrix:
         update: true
         sources:
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-trusty-5.0
+          - llvm-toolchain-trusty-6.0
         packages:
-          - clang-5.0
+          - clang-6.0
           - libc++-dev
           - libc++abi-dev
     env:
-      - MATRIX_EVAL="CC=clang-5.0 && CXX=clang-5.0"
+      - MATRIX_EVAL="CC=clang-6.0 && CXX=clang-6.0"
       - EXTRA_CXX_FLAGS="-stdlib=libc++"
     script:
-      - export CC=/usr/bin/clang-5.0
-      - export CXX=/usr/bin/clang-5.0
+      - export CC=/usr/bin/clang-6.0
+      - export CXX=/usr/bin/clang-6.0
       - mkdir build;
       - cd build
       - conan create .. LogicalAccess/2.1.0@islog/develop
@@ -65,4 +65,3 @@ before_install:
 install:
   - pip install conan
   - conan user
-  - sudo apt-get install -y libc++-dev libc++abi-dev
