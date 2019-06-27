@@ -44,8 +44,8 @@ matrix:
           - llvm-toolchain-trusty-6.0
         packages:
           - clang-6.0
-          - libc++
-          - libc++abi
+          - libc++-dev
+          - libc++abi-dev
     env:
       - MATRIX_EVAL="CC=clang-6.0 && CXX=clang-6.0"
       - EXTRA_CXX_FLAGS="-stdlib=libc++"
