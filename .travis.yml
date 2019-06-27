@@ -38,13 +38,13 @@ matrix:
       apt:
         update: true
         sources:
-          - llvm-toolchain-trusty-7
+          - llvm-toolchain-trusty-6.0
     env:
-      - MATRIX_EVAL="CC=clang-7.0 && CXX=clang-7"
+      - MATRIX_EVAL="CC=clang-6.0 && CXX=clang-6.0"
     script:
-      - sudo apt-get install clang-7
-      - export CC=/usr/bin/clang-7
-      - export CXX=/usr/bin/clang-7
+      - sudo apt-get install clang-6.0
+      - export CC=/usr/bin/clang-6.0
+      - export CXX=/usr/bin/clang-6.0
       - mkdir build;
       - cd build
       - conan create .. LogicalAccess/2.1.0@islog/develop
