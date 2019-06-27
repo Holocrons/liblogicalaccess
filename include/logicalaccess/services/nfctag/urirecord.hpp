@@ -9,6 +9,8 @@
 
 #include <logicalaccess/services/nfctag/ndefrecord.hpp>
 #include <unordered_map>
+#include <functional>
+#include <iostream>
 
 namespace logicalaccess
 {
