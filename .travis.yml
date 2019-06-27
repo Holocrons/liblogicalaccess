@@ -12,6 +12,7 @@ matrix:
         update: true
         sources:
           - ubuntu-toolchain-r-test
+          - llvm-toolchain-trusty-5.0
         packages:
           - g++-6
           - gcc-6
@@ -38,13 +39,15 @@ matrix:
       apt:
         update: true
         sources:
-          - llvm-toolchain-trusty-6.0
+          - ubuntu-toolchain-r-test
+          - llvm-toolchain-trusty-5.0
+        packages:
+          - clang-5.0
     env:
-      - MATRIX_EVAL="CC=clang-6.0 && CXX=clang-6.0"
+      - MATRIX_EVAL="CC=clang-5.0 && CXX=clang-5.0"
     script:
-      - sudo apt-get install clang-6.0
-      - export CC=/usr/bin/clang-6.0
-      - export CXX=/usr/bin/clang-6.0
+      - export CC=/usr/bin/clang-5.0
+      - export CXX=/usr/bin/clang-5.0
       - mkdir build;
       - cd build
       - conan create .. LogicalAccess/2.1.0@islog/develop
