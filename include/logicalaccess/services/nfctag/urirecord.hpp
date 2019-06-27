@@ -56,7 +56,7 @@ class LLA_CORE_API UriRecord : public NdefRecord
   private:
     std::string m_uri;
     UriType m_prefixe;
-    std::unordered_map<UriType, std::string> m_prefixeMap;
+    std::unordered_map<UriType, int, std::string> m_prefixeMap;
 };
 }
 
