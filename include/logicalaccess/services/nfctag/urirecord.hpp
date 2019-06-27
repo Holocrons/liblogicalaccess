@@ -26,6 +26,17 @@ namespace logicalaccess
       URI_FILE  = 0x1D  // file://
   };
 
+  namespace std
+  {
+    template <logicalaccess::UriType>
+    struct hash<logicalaccess::UriType>
+    {
+      size_t operator()(const logicalaccess::UriType& id) const noexcept
+      {
+        return 0;
+      }
+    };
+  }
 
 class LLA_CORE_API UriRecord : public NdefRecord
 {
@@ -60,15 +71,4 @@ class LLA_CORE_API UriRecord : public NdefRecord
 };
 }
 
-namespace std
-{
-  template <logicalaccess::UriType>
-  struct hash<logicalaccess::UriType>
-  {
-     size_t operator()(const logicalaccess::UriType& id) const noexcept
-     {
-       return 0;
-     }
-   };
-}
 #endif
