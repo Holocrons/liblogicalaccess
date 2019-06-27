@@ -26,7 +26,7 @@ namespace logicalaccess
 
   template<> struct std::less<UriType>
   {
-    bool operator() (const UriTyp& lhs, const UriTyp& rhs) const
+    bool operator() (const UriType& lhs, const UriType& rhs) const
     {
       return lhs < rhs;
     }
