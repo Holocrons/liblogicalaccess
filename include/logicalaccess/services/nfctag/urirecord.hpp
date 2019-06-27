@@ -56,18 +56,18 @@ class LLA_CORE_API UriRecord : public NdefRecord
   private:
     std::string m_uri;
     UriType m_prefixe;
-    std::unordered_map<UriType, int, std::string> m_prefixeMap;
+    std::unordered_map<UriType, std::string> m_prefixeMap;
 };
 }
 
+template <int N, class TypeId> struct Indexer {};
+
 namespace std
 {
-  template<> struct std::less<logicalaccess::UriType>
+  template <int N, class TypeId>
+  struct hash<Indexer<N, TypeId> >
   {
-    bool operator() (const logicalaccess::UriType& lhs, const logicalaccess::UriType& rhs) const
-    {
-      return lhs < rhs;
-    }
-  };
+     size_t operator()(const Indexer<N, TypeId>& id) const noexcept { return 0; }
+   };
 }
 #endif
