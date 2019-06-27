@@ -47,6 +47,7 @@ matrix:
           - libc++abi-dev
     env:
       - MATRIX_EVAL="CC=clang-5.0 && CXX=clang-5.0"
+      - EXTRA_CXX_FLAGS="-stdlib=libc++"
     script:
       - export CC=/usr/bin/clang-5.0
       - export CXX=/usr/bin/clang-5.0
@@ -64,3 +65,4 @@ before_install:
 install:
   - pip install conan
   - conan user
+  - sudo apt-get install -y libc++-dev libc++abi-dev
