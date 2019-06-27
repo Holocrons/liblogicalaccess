@@ -12,7 +12,20 @@
 #include <functional>
 #include <iostream>
 
-enum logicalaccess::UriType;
+namespace logicalaccess
+{
+  enum UriType
+  {
+      NO_PREFIX = 0x00, // no prefix
+      HTTP_WWW  = 0x01, // http://www.
+      HTTPS_WWW = 0x02, // https://www.
+      HTTP      = 0x03, // http://
+      HTTPS     = 0x04, // https://
+      TEL       = 0x05, // tel:
+      MAIL_TO   = 0x06, // mailto:
+      URI_FILE  = 0x1D  // file://
+  };
+}
 namespace std
 {
   template <logicalaccess::UriType>
@@ -27,18 +40,6 @@ namespace std
 
 namespace logicalaccess
 {
-  enum UriType
-  {
-      NO_PREFIX = 0x00, // no prefix
-      HTTP_WWW  = 0x01, // http://www.
-      HTTPS_WWW = 0x02, // https://www.
-      HTTP      = 0x03, // http://
-      HTTPS     = 0x04, // https://
-      TEL       = 0x05, // tel:
-      MAIL_TO   = 0x06, // mailto:
-      URI_FILE  = 0x1D  // file://
-  };
-
 class LLA_CORE_API UriRecord : public NdefRecord
 {
   public:
