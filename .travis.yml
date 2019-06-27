@@ -34,6 +34,7 @@ matrix:
     dist: trusty
     compiler:
       - clang
+      - clang++
     language: python
     addons:
       apt:
