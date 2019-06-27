@@ -26,13 +26,6 @@ namespace logicalaccess
       URI_FILE  = 0x1D  // file://
   };
 
-  template<> struct std::less<UriType>
-  {
-    bool operator() (const UriType& lhs, const UriType& rhs) const
-    {
-      return lhs < rhs;
-    }
-  };
 
 class LLA_CORE_API UriRecord : public NdefRecord
 {
@@ -67,4 +60,14 @@ class LLA_CORE_API UriRecord : public NdefRecord
 };
 }
 
+namespace std
+{
+  template<> struct std::less<logicalaccess::UriType>
+  {
+    bool operator() (const logicalaccess::UriType& lhs, const logicalaccess::UriType& rhs) const
+    {
+      return lhs < rhs;
+    }
+  };
+}
 #endif
