@@ -46,7 +46,7 @@ matrix:
           - clang-6.0
           - libc++-dev
           - libc++abi-dev
-          - libstdc++
+          - libstdc++-6-dev
     env:
       - MATRIX_EVAL="CC=clang-6.0 && CXX=clang-6.0"
       - EXTRA_CXX_FLAGS="-stdlib=libc++"
