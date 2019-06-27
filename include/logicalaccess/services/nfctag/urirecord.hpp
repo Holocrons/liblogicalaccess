@@ -62,10 +62,10 @@ class LLA_CORE_API UriRecord : public NdefRecord
 
 namespace std
 {
-  template <UriType>
-  struct hash<UriType>
+  template <logicalaccess::UriType>
+  struct hash<logicalaccess::UriType>
   {
-     size_t operator()(const UriType& id) const noexcept
+     size_t operator()(const logicalaccess::UriType& id) const noexcept
      {
        return 0;
      }
