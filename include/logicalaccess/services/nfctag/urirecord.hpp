@@ -24,7 +24,7 @@ namespace logicalaccess
       URI_FILE  = 0x1D  // file://
   };
 
-  template<> struct less<UriType>
+  template<> struct std::less<UriType>
   {
     bool operator() (const UriTyp& lhs, const UriTyp& rhs) const
     {
