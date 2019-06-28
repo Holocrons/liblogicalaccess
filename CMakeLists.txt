@@ -87,7 +87,7 @@ set(LLA_ADDITIONAL_LIBRARIES_TO_LINK_AGAINST)
 
 if (UNIX AND NOT ANDROID)
     target_compile_options(logicalaccess PUBLIC -W -Wall -Wno-unused-parameter)
-    list(APPEND LLA_ADDITIONAL_LIBRARIES_TO_LINK_AGAINST dl pthread -stdlib=libc++)
+    list(APPEND LLA_ADDITIONAL_LIBRARIES_TO_LINK_AGAINST dl pthread -stdlib=libstdc++)
 endif ()
 
 target_link_libraries(logicalaccess PUBLIC
