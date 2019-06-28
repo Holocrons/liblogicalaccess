@@ -75,7 +75,7 @@ generate_export_header(logicalaccess
         EXPORT_MACRO_NAME LLA_CORE_API
         EXPORT_FILE_NAME "${CMAKE_CURRENT_SOURCE_DIR}/include/logicalaccess/lla_core_api.hpp")
 target_compile_definitions(logicalaccess PRIVATE logicalaccess_EXPORTS=1)
-      
+
 if (LLA_BOOST_ASIO_HAS_STD_STRING_VIEW)
   # Work around a boost / clang issue with include to string/view.
   # See https://github.com/boostorg/asio/issues/82
@@ -87,7 +87,7 @@ set(LLA_ADDITIONAL_LIBRARIES_TO_LINK_AGAINST)
 
 if (UNIX AND NOT ANDROID)
     target_compile_options(logicalaccess PUBLIC -W -Wall -Wno-unused-parameter)
-    list(APPEND LLA_ADDITIONAL_LIBRARIES_TO_LINK_AGAINST dl pthread)
+    list(APPEND LLA_ADDITIONAL_LIBRARIES_TO_LINK_AGAINST dl pthread -stdlib=libc++)
 endif ()
 
 target_link_libraries(logicalaccess PUBLIC
