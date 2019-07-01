@@ -26,6 +26,9 @@ before_build:
   - cmd: cd c:\projects\liblogicalaccess
 
 build_script:
+  - cmd: echo {branch}
+  - cmd: echo %branch%
+  - cmd: echo branch
   - cmd: mkdir build
   - cmd: cd build
   - cmd: conan create .. LogicalAccess/2.1.0@islog/%branch%
