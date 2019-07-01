@@ -20,6 +20,8 @@ matrix:
       - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
     script:
       - echo {TRAVIS_BRANCH}
+      - echo %TRAVIS_BRANCH%
+      - echo $(TRAVIS_BRANCH)
       - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
       - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
       - export CC=/usr/bin/gcc-6
