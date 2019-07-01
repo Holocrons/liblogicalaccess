@@ -26,15 +26,9 @@ before_build:
   - cmd: cd c:\projects\liblogicalaccess
 
 build_script:
-  - cmd: echo {branch}
-  - cmd: echo %branch%
-  - cmd: echo branch
-  - cmd: echo $(branch)
-  - cmd: echo APPVEYOR_REPO_BRANCH
-  - cmd: echo %APPVEYOR_REPO_BRANCH%
   - cmd: mkdir build
   - cmd: cd build
-  - cmd: conan create .. LogicalAccess/2.1.0@islog/%branch%
+  - cmd: conan create .. LogicalAccess/%APPVEYOR_BUILD_VERSION%@islog/%APPVEYOR_REPO_BRANCH%
   - cmd: conan install .. -o LLA_BUILD_UNITTEST=True --build gtest
   - cmd: conan build ..
 
