@@ -31,6 +31,7 @@ build_script:
   - cmd: echo branch
   - cmd: echo $(branch)
   - cmd: echo APPVEYOR_REPO_BRANCH
+  - cmd: echo %APPVEYOR_REPO_BRANCH%
   - cmd: mkdir build
   - cmd: cd build
   - cmd: conan create .. LogicalAccess/2.1.0@islog/%branch%
