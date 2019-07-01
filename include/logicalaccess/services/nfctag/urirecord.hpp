@@ -27,17 +27,18 @@ namespace logicalaccess
   };
 }
 
+namespace std {
+  template <> struct hash<logicalaccess::UriType>
+  {
+    size_t operator()(const logicalaccess::UriType & x) const
+    {
+      return hash<int>()(x);
+    }
+  };
+}
+
 namespace logicalaccess
 {
-
-  class MyHashFunction {
-  public:
-      size_t operator()(const UriType& p) const
-      {
-          return sizeof(UriType);
-      }
-  };
-
 class LLA_CORE_API UriRecord : public NdefRecord
 {
   public:
@@ -67,7 +68,7 @@ class LLA_CORE_API UriRecord : public NdefRecord
   private:
     std::string m_uri;
     UriType m_prefixe;
-    std::unordered_map<UriType, std::string, MyHashFunction> m_prefixeMap;
+    std::unordered_map<UriType, std::string> m_prefixeMap;
 };
 }
 
