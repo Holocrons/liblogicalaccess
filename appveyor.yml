@@ -1,4 +1,4 @@
-version: 2.1.0.{build}
+version: 2.1.0-{build}
 
 platform:
   - x86
@@ -28,7 +28,7 @@ before_build:
 build_script:
   - cmd: mkdir build
   - cmd: cd build
-  - cmd: conan create .. LogicalAccess/{version}@islog/{branch}
+  - cmd: conan create .. LogicalAccess/2.1.0@islog/develop
   - cmd: conan install .. -o LLA_BUILD_UNITTEST=True --build gtest
   - cmd: conan build ..
 
