@@ -28,7 +28,7 @@ before_build:
 build_script:
   - cmd: mkdir build
   - cmd: cd build
-  - cmd: conan create .. LogicalAccess/%APPVEYOR_BUILD_VERSION%@islog/%APPVEYOR_REPO_BRANCH% -f
+  - cmd: conan create .. LogicalAccess/%APPVEYOR_BUILD_VERSION%@islog/%APPVEYOR_REPO_BRANCH%
   - cmd: conan install .. -o LLA_BUILD_UNITTEST=True --build gtest
   - cmd: conan build ..
 
