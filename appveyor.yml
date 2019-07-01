@@ -16,7 +16,7 @@ branches:
 # clone directory
 clone_folder: c:\projects\liblogicalaccess
 install:
-  - cmd: sed -i '/version = "2.1.0"/c\\tversion = "%APPVEYOR_BUILD_VERSION%"' conanfile.py
+  - cmd: sed -i '/version = "2.1.0"/c\ \tversion = "%APPVEYOR_BUILD_VERSION%"' conanfile.py
   - cmd: cat conanfile.py
   - cmd: echo "Downloading conan..."
   - cmd: set PATH=%PATH%;%PYTHON%/Scripts/
