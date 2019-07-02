@@ -1,4 +1,4 @@
-version: 2.1.0
+version: 2.1.0.{build}
 
 platform:
   - x86
@@ -14,9 +14,6 @@ branches:
   - develop
 
 on_finish:
-  - cmd: ls
-  - cmd: ls ..
-  - cmd: cat ../conanbuildinfo.cmake
   - ps: $blockRdp = $true; Invoke-Expression (Invoke-WebRequest 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1')
 
 
@@ -38,7 +35,9 @@ build_script:
   - cmd: mkdir build
   - cmd: cd build
   - cmd: conan create .. LogicalAccess/%APPVEYOR_BUILD_VERSION%@islog/%APPVEYOR_REPO_BRANCH%
+  - cmd: echo xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   - cmd: conan install .. -o LLA_BUILD_UNITTEST=True --build gtest
+  - cmd: echo yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
   - cmd: conan build ..
 
 test_script:
