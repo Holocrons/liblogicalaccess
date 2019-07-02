@@ -14,7 +14,9 @@ branches:
   - develop
 
 on_finish:
-  - cmd: cat ../conanbuildinfo.cmake
+  - cmd: ls
+  - cmd: ls ..
+  #- cmd: cat ../conanbuildinfo.cmake
   #- ps: $blockRdp = $true; Invoke-Expression (Invoke-WebRequest 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1')
 
 
