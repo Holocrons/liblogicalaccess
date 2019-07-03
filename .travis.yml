@@ -10,6 +10,10 @@ matrix:
       - gcc
     language: python
     addons:
+      sonarcloud:
+        organization: "holocrons-github"
+        token:
+          secure: 62b70f83d7c15a94c811a3d8ba5fe0bc23982e88 # encrypted value of your token
       apt:
         update: true
         sources:
@@ -32,7 +36,7 @@ matrix:
       - conan create .. LogicalAccess/$PACKAGE_VERSION@islog/$TRAVIS_BRANCH
       - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL
       - conan build ..
-      - ctest
+      - sonar-scanner
 
   - os: linux
     dist: trusty
@@ -66,45 +70,6 @@ matrix:
       - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL --build libstdc++-6-dev
       - conan build ..
       - ctest
-
-    - os: linux
-      dist: trusty
-      compiler:
-        - gcc
-      language: python
-      addons:
-        sonarcloud:
-          organization: "holocrons-github"
-          token:
-            secure: 62b70f83d7c15a94c811a3d8ba5fe0bc23982e88 # encrypted value of your token
-        apt:
-          update: true
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - g++-6
-            - gcc-6
-      env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
-        - PACKAGE_VERSION="2.1.0"
-      script:
-        - echo $PACKAGE_VERSION
-        - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
-        - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
-        - export CC=/usr/bin/gcc-6
-        - export CXX=/usr/bin/g++-6
-        - mkdir build;
-        - cd build
-        - conan create .. LogicalAccess/$PACKAGE_VERSION@islog/$TRAVIS_BRANCH
-        - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL
-        - conan build ..
-        - ctest
-        - sonar-scanner
-
-script:
-  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - sonar-scanner
 
 before_install:
   - sudo apt-get install -y libpcsclite-dev
