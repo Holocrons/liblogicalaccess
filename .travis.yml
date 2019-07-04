@@ -51,6 +51,8 @@ matrix:
       - clang
       - clang++
     language: python
+    before_install:
+      - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
     addons:
       apt:
         update: true
@@ -76,7 +78,8 @@ matrix:
           - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL --build libstdc++-6-dev
         build_command:
           - conan build ..
-        branch_pattern: $TRAVIS_BRANCH
+        branch_pattern:
+          - $TRAVIS_BRANCH
     env:
       global:
         - secure: "aZv8Yp75cxDZjLLX1sV0XvwkVOJjkYEsKyX1vjk5SqrRYbHvR3nEXSz95LalIOld844e5QLSDoyBzp22HD2F+4lzHbs4qtBRdtIwt3Cf9GA63z6Ax9UrjyzNQnIBpLiYk2W4pHo2hatpW4wg5ZUKW981RqU4hMz61x2uzF04VBUEctQOc3nrRBlEt/5QSlKLxckZPfIJzE2Qf0Mv6N20aOZAhoYeUyEb05RzvD7k9mu2TiB94R5MqfnxB9FjSCw/5bDIGlgtOi7eossS+B21+7fV18i655II497dI8VzcL6ye5R+0+sgi1i7w35bCVOufAkQcvKEBBhJpwK0Zi5beUSqFU5dVqihKhyRLC+MnAl9yUZSPC8cV5yJhWMzZrkWXFSHLefEePq3wnpK0IFcLvkYN1bMnEhX5jU6s3pgcnWu/CvPPYaAYt2K6dwa/w7BLFkO6/24zBiZT/Y/E1DxVySJMC/KMT9AOtDAt7nvFBRr322gPE6WLQQ654sdlgyHhpHzauvWfGtZPB735GlpjXgNWibwihnx8Uv3Erz8z80D/tyiQORNYxtO0yi5ggtfsM2yXdGO2YzZaS4IXN/LNJGHOmr0CfF4296yhrHcsj7OnEuHQWpQc2lQEIkly4V0fn102n6N8fngZGnD5ygdMU6/PIRwsfMCizp7ulcIVUw="
@@ -85,8 +88,6 @@ matrix:
       - EXTRA_CXX_FLAGS="-stdlib=libstdc++-6-dev"
       - EXTRA_CXX_LINKER_FLAGS="-stdlib=libstdc++-6-dev"
       - EXTRA_LDFLAGS="-lstdc++"
-      before_install:
-        - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 before_install:
   - sudo apt-get install -y libpcsclite-dev
