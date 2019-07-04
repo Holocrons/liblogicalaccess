@@ -62,8 +62,8 @@ matrix:
       - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
     addons:
       coverity_scan:
+        token: RhRBth7xZeXGZb_wX_7L8g 
         project:
-          token: RhRBth7xZeXGZb_wX_7L8g 
           name: "Holocrons/liblogicalaccess"
           description: "courge maker since 1884"
           notification_email: remi.wickuler@epitech.eu
