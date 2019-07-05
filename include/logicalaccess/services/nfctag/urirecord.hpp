@@ -41,6 +41,8 @@ namespace logicalaccess
 {
 class LLA_CORE_API UriRecord : public NdefRecord
 {
+  class LLA_CORE_API UriRecord : public NdefRecord
+  {
   public:
     UriRecord()
         : NdefRecord()
