@@ -4,7 +4,7 @@ matrix:
   env:
     - PACKAGE_VERSION="2.1.0"
   include:
-- os: linux
+  - os: linux
     dist: trusty
     compiler:
       - clang
