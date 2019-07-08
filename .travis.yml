@@ -7,90 +7,46 @@ matrix:
   - os: linux
     dist: trusty
     compiler:
-      - gcc
+      - clang
+      - clang++
     language: python
+    env:
+      global:
+        - PACKAGE_VERSION="2.1.0"
+        - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
+        - EXTRA_CXX_FLAGS="-stdlib=libstdc++-6-dev"
+        - EXTRA_CXX_LINKER_FLAGS="-stdlib=libstdc++-6-dev"
+        - EXTRA_LDFLAGS="-lstdc++"
+        -  secure: "gAD1npjE1J62ewfzQ9Fkg1tpQVI8DEdDYgguZT+HByvL+10J5vr4CdaJwwShUr2MHKgOpJhYGqppkWc93MmqcHb0fUnFVALn8gM6AaG0Pqnwxg/2/g/TDR5gRFQgtq6Ya9l9s9cOagyeAWE9joEOb+1W2DxNgl/gHW2yPGi0C6x//bPRye2Fx42rktHGE6No8UAYStxi0LR4g9xwf3lh9ezWzTJIVMI0zmn7bYM/iCmbDJofuHyx46ROzNsRgSUj3nduUFm2D7skTez04FTxW74pv+J7iY7LRDxjhkizyL2X05LbgfMy6VkBQzBH/XWM+evU1UodC6FJtzhIBVL8+9t3yjhb1kZpuAlFH4HEGP33D71iTG/tpWO2S4IsnGXUw3yXlLhqKFqq0iKKVCUhWTUx/uYSn5DTDTxRaxtpHvOgzMBQZC+RXp8RxIws5vj1CpdJE2suTEEPC+jg5gC9jz7s8lC+3b5j0qx9YMxeC/ARjoa+EYqhayqZTix8wHRQ9tzsb5Jyd4qeRKVTLkJAo73+gDS55K0DHyd4rD66bGWGqbyrwxjXhdK2ZIVsEzxM0qaw14Bo5bvDGgOyONEDzzKuClKHxD2XHqKXboHKMgXjNhji8ARdcNM1Rp+fLVjZwYSiLGIkE8t/5QbzmZ5R07vDFytuLSy1iS96EekCYPk="
+    before_install:
+      - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
     addons:
-      sonarcloud:
-        organization: "holocrons-github"
-        token:
-          secure: 62b70f83d7c15a94c811a3d8ba5fe0bc23982e88
-        #organization: "Holocons_liblogicalaccess"
-        #token:
-        #   secure: "cJ9Sg7kYCaHISdArKhNbpNjlpIIxVNRi6saoPqXmCW4msYIGoMuWazrYBOsH6z2E3lnAoqRzoCEHoXZJcOJTqK9gwH9L+CapMiqVy0PgGsyJp/oMUbbJlOJiF9BTRxnv5KhHHa2zRmI2ZVKq87/T5G4jmG23CqzBs3D4FkrrlNk="
+      coverity_scan:
+        project:
+          name: "Holocrons/liblogicalaccess"
+          description: "courge maker since 1884"
+          notification_email: remi.wickuler@epitech.eu
+          build_command_prepend:
+            - export CC=/usr/bin/clang-6.0
+            - export CXX=/usr/bin/clang++-6.0
+            - mkdir build;
+            - cd build
+            - conan create .. LogicalAccess/$PACKAGE_VERSION@islog/$TRAVIS_BRANCH
+            - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL --build libstdc++-6-dev
+            build_command:
+              - conan build ..
+            branch_pattern:
+              - coverity_scan
       apt:
         update: true
         sources:
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-trusty-5.0
+          - llvm-toolchain-trusty-6.0
         packages:
-          - g++-6
-          - gcc-6
-    env:
-      - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
-      - PACKAGE_VERSION="2.1.0"
-    script:
-      - echo $PACKAGE_VERSION
-      - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
-      - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
-      - export CC=/usr/bin/gcc-6
-      - export CXX=/usr/bin/g++-6
-      - wget "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.0.0.1744-linux.zip"
-      - unzip sonar-scanner-cli-4.0.0.1744-linux.zip
-      - export PATH=$PATH:/home/travis/build/Holocrons/liblogicalaccess/sonar-scanner-cli-4.0.0.1744-linux.zip
-      - mkdir build;
-      - cd build
-      - conan create .. LogicalAccess/$PACKAGE_VERSION@islog/$TRAVIS_BRANCH
-      - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL
-      - build-wrapper-linux-x86-64 --out-dir . conan build ..
-      - cd ..
-      - sonar-scanner
-    cache:
-      directories:
-        - '$HOME/.sonar/cache'
-
-#  - os: linux
-#    dist: trusty
-#    compiler:
-#      - clang
-#      - clang++
-#    language: python
-#    env:
-#      global:
-#        - PACKAGE_VERSION="2.1.0"
-#        - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
-#        - EXTRA_CXX_FLAGS="-stdlib=libstdc++-6-dev"
-#        - EXTRA_CXX_LINKER_FLAGS="-stdlib=libstdc++-6-dev"
-#        - EXTRA_LDFLAGS="-lstdc++"
-#    before_install:
-#      - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
-#    addons:
-#      coverity_scan:
-#        token: RhRBth7xZeXGZb_wX_7L8g
-#        project:
-#          name: "Holocrons/liblogicalaccess"
-#          description: "courge maker since 1884"
-#          notification_email: remi.wickuler@epitech.eu
-#          build_command_prepend:
-#            - export CC=/usr/bin/clang-6.0
-#            - export CXX=/usr/bin/clang++-6.0
-#            - mkdir build;
-#            - cd build
-#            - conan create .. LogicalAccess/$PACKAGE_VERSION@islog/$TRAVIS_BRANCH
-#            - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL --build libstdc++-6-dev
-#            build_command:
-#              - conan build ..
-#              branch_pattern:
-#                - $TRAVIS_BRANCH
-#      apt:
-#        update: true
-#        sources:
-#          - ubuntu-toolchain-r-test
-#          - llvm-toolchain-trusty-6.0
-#        packages:
-#          - clang-6.0
-#          - libc++-dev
-#          - libc++abi-dev
-#          - libstdc++-6-dev
+          - clang-6.0
+          - libc++-dev
+          - libc++abi-dev
+          - libstdc++-6-dev
 
 before_install:
   - sudo apt-get install -y libpcsclite-dev
