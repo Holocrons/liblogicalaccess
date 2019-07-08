@@ -26,7 +26,7 @@ matrix:
           name: "Holocrons/liblogicalaccess"
           description: "courge maker since 1884"
           notification_email: remi.wickuler@epitech.eu
-          build_command_prepend: "export CC=/usr/bin/clang-6.0 ; export CXX=/usr/bin/clang++-6.0 ; mkdir build ; cd build ; conan create .. LogicalAccess/$PACKAGE_VERSION@islog/$TRAVIS_BRANCH ; conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL --build libstdc++-6-dev"
+          build_command_prepend: "export CC=/usr/bin/clang-6.0 ; export CXX=/usr/bin/clang++-6.0 ; mkdir build ; cd build ; conan create .. LogicalAccess/$PACKAGE_VERSION@Holocrons/$TRAVIS_BRANCH ; conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL --build libstdc++-6-dev"
           build_command: "conan build .."
           branch_pattern: $TRAVIS_BRANCH
       apt:
@@ -40,6 +40,12 @@ matrix:
           - libc++abi-dev
           - libstdc++-6-dev
     script:
+      - export CC=/usr/bin/clang-6.0
+      - export CXX=/usr/bin/clang++-6.0
+      - mkdir build
+      - cd build
+      - conan create .. LogicalAccess/$PACKAGE_VERSION@Holocrons/$TRAVIS_BRANCH
+      - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL --build libstdc++-6-dev
       - conan build ..
 
 
