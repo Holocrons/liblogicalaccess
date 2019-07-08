@@ -17,7 +17,7 @@ matrix:
         - EXTRA_CXX_FLAGS="-stdlib=libstdc++-6-dev"
         - EXTRA_CXX_LINKER_FLAGS="-stdlib=libstdc++-6-dev"
         - EXTRA_LDFLAGS="-lstdc++"
-        -  secure: "bMRgPbvksjJulsjQtBwCOspm1Imm3cMExThG4ns4HxaRPVCePogQ43T9pSVvw6u+PT3EfkNMCFakrGyCFQo1Wb8ZldnL0gj7PslrY/6OjxVWHeQrdQ+eYF+q386Ye32R3O4idIVIg9PW04qE6ecsksZxEemeW0oYtH9U9Wijp5rom7lAtOMyZOwRi3XDb7LEFcgS8AAHSz4Ko0CBEvWkVJYwB8ZtNBM2BIRtAOuklTsKlY07TygWfBS84f7/VK9VRGD0DfZHSgT3pm0EnB/P+kzpGZuM18A0uTUBIgHSfNMdwXz7etgqf4kIs6n+j4FYCMtGC3oUrMCVTmKYGvovLTA9yEWbRuPhNMF8Jgep0jV+VXSmeh+8qTnspNNaMIU+GVcrnbqi2W8+fU6MJTAgEl6RnXhYxthzJtPoZ6Ra7OcYU8L9idSDPTG9543gExSYX6rXBRBbVmcKy3aKHU8z0EhXP1VmYHew+8UXDXRn2CKStfAYd/eGB/Bui6f5GTFCXDZoEWzGKmCOUts7tGiCu3jZAU4VUPq63qA7XHC0clV0n4DAXVFtmYXxyOGXz/sE5R7Fp3tBDi+MatE1wXYf64yeXG321tHNJnU13zGw4LPdmy4BYh8g0OS2iEhFKog8nUWsVm4iUFnD57X4nFFc2UAYIBMQqB+Iu1Y4JxDMkqQ="
+        -  token: "RhRBth7xZeXGZb_wX_7L8g"
     before_install:
       - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
       - sudo apt-get install -y libpcsclite-dev
