@@ -22,8 +22,6 @@ matrix:
       - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
       - sudo apt-get install -y libpcsclite-dev
       - eval "${MATRIX_EVAL}"
-      - echo $PROJECT_NAME
-      - echo $COVERITY_SCAN_TOKEN
     addons:
       coverity_scan:
         project:
@@ -49,3 +47,5 @@ matrix:
 install:
   - pip install conan
   - conan user
+  - echo $PROJECT_NAME
+  - echo $COVERITY_SCAN_TOKEN
