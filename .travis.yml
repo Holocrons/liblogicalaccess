@@ -42,9 +42,9 @@ matrix:
     script:
       - export CC=/usr/bin/clang-6.0
       - export CXX=/usr/bin/clang++-6.0
-      - mkdir build
+      - mkdir build;
       - cd build
-      - conan create .. LogicalAccess/$PACKAGE_VERSION@Holocrons/$TRAVIS_BRANCH
+      - conan create .. LogicalAccess/$PACKAGE_VERSION/Holocrons/$TRAVIS_BRANCH
       - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL --build libstdc++-6-dev
       - conan build ..
 
