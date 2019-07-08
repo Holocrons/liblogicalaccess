@@ -17,7 +17,7 @@ matrix:
         - EXTRA_CXX_FLAGS="-stdlib=libstdc++-6-dev"
         - EXTRA_CXX_LINKER_FLAGS="-stdlib=libstdc++-6-dev"
         - EXTRA_LDFLAGS="-lstdc++"
-        -  secure: "gAD1npjE1J62ewfzQ9Fkg1tpQVI8DEdDYgguZT+HByvL+10J5vr4CdaJwwShUr2MHKgOpJhYGqppkWc93MmqcHb0fUnFVALn8gM6AaG0Pqnwxg/2/g/TDR5gRFQgtq6Ya9l9s9cOagyeAWE9joEOb+1W2DxNgl/gHW2yPGi0C6x//bPRye2Fx42rktHGE6No8UAYStxi0LR4g9xwf3lh9ezWzTJIVMI0zmn7bYM/iCmbDJofuHyx46ROzNsRgSUj3nduUFm2D7skTez04FTxW74pv+J7iY7LRDxjhkizyL2X05LbgfMy6VkBQzBH/XWM+evU1UodC6FJtzhIBVL8+9t3yjhb1kZpuAlFH4HEGP33D71iTG/tpWO2S4IsnGXUw3yXlLhqKFqq0iKKVCUhWTUx/uYSn5DTDTxRaxtpHvOgzMBQZC+RXp8RxIws5vj1CpdJE2suTEEPC+jg5gC9jz7s8lC+3b5j0qx9YMxeC/ARjoa+EYqhayqZTix8wHRQ9tzsb5Jyd4qeRKVTLkJAo73+gDS55K0DHyd4rD66bGWGqbyrwxjXhdK2ZIVsEzxM0qaw14Bo5bvDGgOyONEDzzKuClKHxD2XHqKXboHKMgXjNhji8ARdcNM1Rp+fLVjZwYSiLGIkE8t/5QbzmZ5R07vDFytuLSy1iS96EekCYPk="
+        -  secure: "bMRgPbvksjJulsjQtBwCOspm1Imm3cMExThG4ns4HxaRPVCePogQ43T9pSVvw6u+PT3EfkNMCFakrGyCFQo1Wb8ZldnL0gj7PslrY/6OjxVWHeQrdQ+eYF+q386Ye32R3O4idIVIg9PW04qE6ecsksZxEemeW0oYtH9U9Wijp5rom7lAtOMyZOwRi3XDb7LEFcgS8AAHSz4Ko0CBEvWkVJYwB8ZtNBM2BIRtAOuklTsKlY07TygWfBS84f7/VK9VRGD0DfZHSgT3pm0EnB/P+kzpGZuM18A0uTUBIgHSfNMdwXz7etgqf4kIs6n+j4FYCMtGC3oUrMCVTmKYGvovLTA9yEWbRuPhNMF8Jgep0jV+VXSmeh+8qTnspNNaMIU+GVcrnbqi2W8+fU6MJTAgEl6RnXhYxthzJtPoZ6Ra7OcYU8L9idSDPTG9543gExSYX6rXBRBbVmcKy3aKHU8z0EhXP1VmYHew+8UXDXRn2CKStfAYd/eGB/Bui6f5GTFCXDZoEWzGKmCOUts7tGiCu3jZAU4VUPq63qA7XHC0clV0n4DAXVFtmYXxyOGXz/sE5R7Fp3tBDi+MatE1wXYf64yeXG321tHNJnU13zGw4LPdmy4BYh8g0OS2iEhFKog8nUWsVm4iUFnD57X4nFFc2UAYIBMQqB+Iu1Y4JxDMkqQ="
     before_install:
       - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
     addons:
@@ -26,17 +26,9 @@ matrix:
           name: "Holocrons/liblogicalaccess"
           description: "courge maker since 1884"
           notification_email: remi.wickuler@epitech.eu
-          build_command_prepend:
-            - export CC=/usr/bin/clang-6.0
-            - export CXX=/usr/bin/clang++-6.0
-            - mkdir build;
-            - cd build
-            - conan create .. LogicalAccess/$PACKAGE_VERSION@islog/$TRAVIS_BRANCH
-            - conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL --build libstdc++-6-dev
-            build_command:
-              - conan build ..
-            branch_pattern:
-              - coverity_scan
+          build_command_prepend: "export CC=/usr/bin/clang-6.0 ; export CXX=/usr/bin/clang++-6.0 ; mkdir build ; cd build ; conan create .. LogicalAccess/$PACKAGE_VERSION@islog/$TRAVIS_BRANCH ; conan install .. -o LLA_BUILD_UNITTEST=True --build gtest --build OpenSSL --build libstdc++-6-dev"
+          build_command: "conan build .."
+          branch_pattern: $TRAVIS_BRANCH
       apt:
         update: true
         sources:
@@ -47,6 +39,9 @@ matrix:
           - libc++-dev
           - libc++abi-dev
           - libstdc++-6-dev
+    script:
+      - conan build ..
+
 
 before_install:
   - sudo apt-get install -y libpcsclite-dev
