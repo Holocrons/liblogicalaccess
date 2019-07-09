@@ -18,7 +18,6 @@ matrix:
         - EXTRA_CXX_FLAGS="-stdlib=libstdc++-6-dev"
         - EXTRA_CXX_LINKER_FLAGS="-stdlib=libstdc++-6-dev"
         - EXTRA_LDFLAGS="-lstdc++"
-        - COVERITY_SCAN_TOKEN="FykdKQ40g5jU3TM2BE/EPxWgKrOLOygAXV/BIyA3+G5Igp3hG/LlkI2LLh5sse1IxwglL/sH9Ybn9zNwWkM7ogyO/fb0+7XCr3u9dScaW02dAcJq6y1YLgR3W42tAUKMMzTNiPzPlHw9nfMLLgthzhI9rFq2sY4+4kn6Z0I6n5SmUfmpwq1QSSoQaGQKNUy4HvyDCW9k/+oXmxNU4xkY/HUMxfP8RGvd7KIkmoQUJm49EqB1eEgphDprORYzTgd1yoKptF2/J9NlbAOwJqvvbNVVUXAm0a53DyVYxGgNjZbecDVMH6/wNcjITScGZgc3ucmFH3i6gqabM4HGmO/xAlXktq8YyXutkfSvUMbUNB43qZ0NfqM2C1XCWkciTxGQZu6PaEaYVcUMAWstpuyl/th7Rbk4X2tyIRduHwfnRU+ZS4OdJN0ihaosX+Q7ErkFfSjxtqAYHUbRhLCcWDuGXWqOBkPg0Jum9Kag4dFnPmBa+BKzNy9ZzSe14hWOt1jKSThXjDmurcmMN9vJ/2Ul69K65NpjCrzsXw/hi4B2K55wfByCwD3CAM4sY0ijMlHY7JkW3aJS/CbAmoEzSMEddZ+47OwE4iAnixE3Catr8XzpE/nbXjqqJzxOWlCQtHvQJajV+6OjOcMYQrr/uBj86d5UvAcYUG/6J9kFy91Pd1c="
     before_install:
       - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
       - sudo apt-get install -y libpcsclite-dev
@@ -48,5 +47,6 @@ matrix:
 install:
   - pip install conan
   - conan user
+  - export COVERITY_SCAN_TOKEN="FykdKQ40g5jU3TM2BE/EPxWgKrOLOygAXV/BIyA3+G5Igp3hG/LlkI2LLh5sse1IxwglL/sH9Ybn9zNwWkM7ogyO/fb0+7XCr3u9dScaW02dAcJq6y1YLgR3W42tAUKMMzTNiPzPlHw9nfMLLgthzhI9rFq2sY4+4kn6Z0I6n5SmUfmpwq1QSSoQaGQKNUy4HvyDCW9k/+oXmxNU4xkY/HUMxfP8RGvd7KIkmoQUJm49EqB1eEgphDprORYzTgd1yoKptF2/J9NlbAOwJqvvbNVVUXAm0a53DyVYxGgNjZbecDVMH6/wNcjITScGZgc3ucmFH3i6gqabM4HGmO/xAlXktq8YyXutkfSvUMbUNB43qZ0NfqM2C1XCWkciTxGQZu6PaEaYVcUMAWstpuyl/th7Rbk4X2tyIRduHwfnRU+ZS4OdJN0ihaosX+Q7ErkFfSjxtqAYHUbRhLCcWDuGXWqOBkPg0Jum9Kag4dFnPmBa+BKzNy9ZzSe14hWOt1jKSThXjDmurcmMN9vJ/2Ul69K65NpjCrzsXw/hi4B2K55wfByCwD3CAM4sY0ijMlHY7JkW3aJS/CbAmoEzSMEddZ+47OwE4iAnixE3Catr8XzpE/nbXjqqJzxOWlCQtHvQJajV+6OjOcMYQrr/uBj86d5UvAcYUG/6J9kFy91Pd1c="
   - echo $PROJECT_NAME
   - echo $COVERITY_SCAN_TOKEN
